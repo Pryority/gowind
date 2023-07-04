@@ -1,0 +1,40 @@
+{{ define "navbar" }}
+<nav class="grid w-full justify-between bg-indigo-50 grid-cols-2 md:grid-cols-8 p-4 md:px-16">
+    <div class="flex w-full col-span-1 md:col-span-4">
+      <h1 class="tracking-wide font-light text-lg md:text-2xl">gowind</h1>
+    </div>
+    <ul class="hidden md:flex w-full items-center h-fit justify-between gap-4 px-8 md:col-span-4">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/login">Login</a></li>
+    </ul>
+    <!-- Hamburger icon -->
+    <div class="flex w-full justify-end items-center md:hidden">
+      <button
+      type="button"
+      class="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+      aria-label="Toggle menu"
+      >
+        <svg
+          class="w-6 h-6 fill-current"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            class="hidden"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4 6h16V5H4v1zm0 5h16v-1H4v1zm16 4H4v1h16v-1z"
+          />
+          <path
+            class="block"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M4 6h16V5H4v1zm0 5h16v-1H4v1zm16 4H4v1h16v-1z"
+          />
+        </svg>
+      </button>
+    </div>
+  </nav>
+  {{end}}

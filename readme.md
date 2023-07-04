@@ -26,7 +26,7 @@ npm run dev
 ```bash
 go build ./cmd/dev-server/
 ./dev-server
-2021/07/23 19:22:53 dev-server started on port  :8080
+2021/07/23 19:22:53 Server started on port  :8080
 ```
 
 The page should open automatically to the /index template

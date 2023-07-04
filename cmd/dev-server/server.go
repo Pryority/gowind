@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"time"
@@ -23,11 +24,11 @@ const (
 	resourceFolder  = "./web/static"
 	localPort       = ":8080"
 	refreshInterval = 1 * time.Second
-	openOn          = "index"
+	openOn          = ""
 )
 
 func main() {
-	log.Println("dev-server started on port ", localPort)
+	log.Println("Server started on port ", localPort)
 	needsRefresh := false
 	// Folder watcher
 	go func() {
@@ -88,6 +89,8 @@ func main() {
 		`, refreshInterval.Milliseconds()))
 		needsRefresh = false
 	}).Methods(http.MethodGet)
+
+	router.HandleFunc("/", loadMain).Methods(http.MethodGet)
 
 	router.HandleFunc("/{template_name}", func(wr http.ResponseWriter, req *http.Request) {
 
@@ -156,4 +159,28 @@ func open(url string) error {
 	}
 	args = append(args, url)
 	return exec.Command(cmd, args...).Start()
+}
+
+func loadMain(wr http.ResponseWriter, req *http.Request) {
+	templateName := "index.tpl.html"
+	templatePath := filepath.Join(templateFolder, templateName)
+
+	tmpl, err := template.ParseFiles(templatePath)
+	if err != nil {
+		http.Error(wr, fmt.Sprintf("Can't read file '%s' - %s", templatePath, err), http.StatusInternalServerError)
+		return
+	}
+
+	// Load additional templates
+	_, err = tmpl.ParseGlob(filepath.Join(templateFolder, "*.tpl.html"))
+	if err != nil {
+		http.Error(wr, fmt.Sprintf("Can't load additional templates - %s", err), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(wr, nil)
+	if err != nil {
+		http.Error(wr, fmt.Sprintf("Can't execute template '%s' - %s", templateName, err), http.StatusInternalServerError)
+		return
+	}
 }
