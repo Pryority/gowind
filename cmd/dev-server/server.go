@@ -27,7 +27,7 @@ const (
 )
 
 func main() {
-	log.Println("Server started on port ", localPort)
+	log.Printf("Server started at http://localhost%s", localPort)
 	needsRefresh := false
 	// Folder watcher
 	go func() {
