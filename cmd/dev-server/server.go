@@ -11,7 +11,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strings"
 	"time"
 
 	"github.com/ViBiOh/httputils/v4/pkg/prometheus"
@@ -92,30 +91,35 @@ func main() {
 
 	router.HandleFunc("/", loadMain).Methods(http.MethodGet)
 
-	router.HandleFunc("/{template_name}", func(wr http.ResponseWriter, req *http.Request) {
+	router.HandleFunc("/{route_name}", func(wr http.ResponseWriter, req *http.Request) {
+		templateName := mux.Vars(req)["route_name"]
 
-		templateName := mux.Vars(req)["template_name"]
-		templatePath := fmt.Sprintf("%s/%s.tpl.html", templateFolder, templateName)
-		templateFileContents, err := ioutil.ReadFile(templatePath)
+		// Define the global layout template
+		layoutPath := filepath.Join(templateFolder, "layout.tpl.html")
+		layoutFileContents, err := ioutil.ReadFile(layoutPath)
 		if err != nil {
-			fmt.Fprintf(wr, "Can't read file '%s' - %s", templatePath, err)
+			fmt.Fprintf(wr, "Can't read file '%s' - %s", layoutPath, err)
 			return
 		}
-		// Load and inject JS
-		tmpl, err := template.New(templateName).Parse(
-			strings.Replace(string(templateFileContents), "</head>", `<script type="text/javascript" src="/reload.js"></script></head>`, 1))
+
+		// Create a new template with the layout
+		tmpl, err := template.New(templateName).Parse(string(layoutFileContents))
 		if err != nil || tmpl == nil {
-			fmt.Fprintf(wr, "Can't find template '%s' - %s", templateName, err)
+			fmt.Fprintf(wr, "Can't create template with layout '%s' - %s", templateName, err)
 			return
 		}
-		_, err = tmpl.ParseGlob(fmt.Sprintf("%s/*", templateFolder))
+
+		// Parse additional templates
+		_, err = tmpl.ParseGlob(filepath.Join(templateFolder, "*.tpl.html"))
 		if err != nil {
-			fmt.Fprintf(wr, "Can't load more template '%s' - %s", templateName, err)
+			fmt.Fprintf(wr, "Can't parse more templates '%s' - %s", templateName, err)
 			return
 		}
+
+		// Execute the template with the specific content
 		err = tmpl.ExecuteTemplate(wr, templateName, nil)
 		if err != nil {
-			fmt.Fprintf(wr, "Can't exec templatePath '%s' - %s", templateName, err)
+			fmt.Fprintf(wr, "Can't execute template '%s' - %s", templateName, err)
 			return
 		}
 	}).Methods(http.MethodGet)
