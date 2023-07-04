@@ -1,9 +1,17 @@
-# LiveReload + Tailwind + Golang
+# gowind
+
+A Golang Full-Stack Scaffold
 
 ## Installation
 
 ```bash
-cd web
+make install
+```
+
+or
+
+```bash
+cd ./web
 npm install
 ```
 

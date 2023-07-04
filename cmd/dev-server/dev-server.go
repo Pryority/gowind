@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/ViBiOh/httputils/v4/pkg/prometheus"
 	"html/template"
 	"io/ioutil"
 	"log"
@@ -13,6 +12,8 @@ import (
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/ViBiOh/httputils/v4/pkg/prometheus"
 
 	"github.com/gorilla/mux"
 )
