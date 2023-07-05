@@ -16,9 +16,11 @@
   <body class="flex flex-col min-h-screen">
     {{ template "navbar" }}
 
-    <div class="content">
+    <!-- <div class="content"> -->
+      <!-- {{ block "about-content" . }}{{ end }} -->
       {{ block "content" . }}{{ end }}
-    </div>
+      
+    <!-- </div> -->
 
     <footer>
       <!-- Footer content here -->
