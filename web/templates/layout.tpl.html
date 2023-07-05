@@ -16,14 +16,16 @@
   <body class="flex flex-col min-h-screen">
     {{ template "navbar" }}
 
-    <!-- <div class="content"> -->
-      <!-- {{ block "about-content" . }}{{ end }} -->
-      {{ block "content" . }}{{ end }}
-      
-    <!-- </div> -->
+    {{ if eq .RouteName "about" }}
+      {{ template "about" }}
+    {{ else if eq .RouteName "contact" }}
+      {{ template "contact" }}
+    {{ else }}
+      {{ template "login" }}
+    {{ end }}
 
     <footer>
       <!-- Footer content here -->
     </footer>
-  </body>
+    </body>
 </html>
