@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "NODE_ENV=development ./node_modules/tailwindcss/lib/cli.js -i ./public/assets/styles/tailwind.css -o ./public/assets/styles/main.css --jit -w",
+    "build": "NODE_ENV=production ./node_modules/tailwindcss/lib/cli.js -i ./public/assets/styles/tailwind.css -o ./public/assets/styles/main.css --jit --minify"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.3",
+    "tailwindcss": "^2.2.6"
+  }
+}
