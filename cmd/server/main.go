@@ -38,7 +38,7 @@ func main() {
 	app.Get("/", loadMain)
 	app.Get("/:route_name", loadTemplate)
 
-	log.Printf("Server started at http://localhost%s", localPort)
+	log.Printf("🌩\tServer started at http://localhost%s", localPort)
 
 	// Start the server
 	if err := app.Listen(localPort); err != nil {
