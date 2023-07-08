@@ -1,6 +1,6 @@
 module.exports = {
     mode: "jit",
-    purge: ["./templates/**/*.html"],
+    purge: ["./views/**/*.html"],
     plugins: [
         // require('@tailwindcss/forms'),
         // ...

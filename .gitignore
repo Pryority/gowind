@@ -2,3 +2,5 @@
 /web/package-lock.json
 /dev-server*
 .vercel
+
+app.env

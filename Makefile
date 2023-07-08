@@ -3,7 +3,7 @@ install:
 	cd web && npm install
 
 dev:
-	go run cmd/server/main.go
+	air	
 
 start:
 	docker build -t gowind .
