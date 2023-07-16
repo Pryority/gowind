@@ -17,13 +17,15 @@
     {{ template "navbar" }}
 
     {{ if eq .RouteName "about" }}
-      {{ template "about" }}
+      {{ template "about" . }}
     {{ else if eq .RouteName "contact" }}
-      {{ template "contact" }}
+      {{ template "contact" . }}
+    {{ else if eq .RouteName "notes" }}
+      {{ template "notes" . }}
     {{ else if eq .RouteName "login" }}
-      {{ template "login" }}
+      {{ template "login" . }}
     {{ else }}
-      {{ template "home" }}
+      {{ template "home" . }}
     {{ end }}
 
     <footer class="grid grid-cols-3 gap-4 w-full bg-blue-50 p-4">
