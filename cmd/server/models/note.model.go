@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 type Note struct {
@@ -18,6 +19,7 @@ type Note struct {
 }
 
 var validate = validator.New()
+var db *gorm.DB
 
 type ErrorResponse struct {
 	Field string `json:"field"`
@@ -52,4 +54,26 @@ type UpdateNoteSchema struct {
 	Content   string `json:"content,omitempty"`
 	Category  string `json:"category,omitempty"`
 	Published *bool  `json:"published,omitempty"`
+}
+
+func CreateNote(db *gorm.DB, noteData CreateNoteSchema) (*Note, error) {
+	newNote := Note{
+		ID:        uuid.New(),
+		Title:     noteData.Title,
+		Content:   noteData.Content,
+		Category:  noteData.Category,
+		Published: noteData.Published,
+	}
+	if err := db.Create(&newNote).Error; err != nil {
+		return nil, err
+	}
+	return &newNote, nil
+}
+
+func GetAllNotes(db *gorm.DB) ([]Note, error) {
+	var notes []Note
+	if err := db.Find(&notes).Error; err != nil {
+		return nil, err
+	}
+	return notes, nil
 }
