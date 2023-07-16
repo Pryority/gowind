@@ -2,7 +2,7 @@
 install:
 	cd web && npm install
 
-dev:
+run:
 	air	
 
 start:
