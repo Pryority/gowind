@@ -20,8 +20,10 @@
       {{ template "about" }}
     {{ else if eq .RouteName "contact" }}
       {{ template "contact" }}
-    {{ else }}
+    {{ else if eq .RouteName "login" }}
       {{ template "login" }}
+    {{ else }}
+      {{ template "home" }}
     {{ end }}
 
     <footer class="grid grid-cols-3 gap-4 w-full bg-blue-50 p-4">
