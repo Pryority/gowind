@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
-	handlers "github.com/pryority/gowind/cmd/server/handlers"
+	"github.com/pryority/gowind/cmd/server/handlers"
 )
 
 const LocalPort = ":8080"
@@ -20,9 +20,9 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/notes", handlers.LoadNotes)
 
 	// Handle API routes
-	// api.Post("/notes", handlers.CreateNoteHandler)
-	api.Get("/notes", handlers.GetAllNotes)
-	// api.Delete("/notes/:id", handlers.DeleteNote)
+	api.Post("/notes", handlers.CreateNoteHandler)
+	// api.Get("/notes", handlers.GetAllNotes)
+	api.Delete("/notes/:id", handlers.DeleteNoteHandler)
 
 	// Catch-all route for templates
 	app.Get("/:route_name", handlers.LoadTemplate)
