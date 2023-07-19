@@ -2,8 +2,8 @@
 install:
 	cd web && npm install
 
-run:
-	air	
+dev:
+	air
 
 start:
 	docker build -t gowind .
