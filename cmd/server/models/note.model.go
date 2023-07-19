@@ -56,6 +56,14 @@ type UpdateNoteSchema struct {
 	Published *bool  `json:"published,omitempty"`
 }
 
+func GetAllNotes(db *gorm.DB) ([]Note, error) {
+	var notes []Note
+	if err := db.Find(&notes).Error; err != nil {
+		return nil, err
+	}
+	return notes, nil
+}
+
 func CreateNote(db *gorm.DB, noteData CreateNoteSchema) (*Note, error) {
 	newNote := Note{
 		ID:        uuid.New(),
@@ -70,10 +78,15 @@ func CreateNote(db *gorm.DB, noteData CreateNoteSchema) (*Note, error) {
 	return &newNote, nil
 }
 
-func GetAllNotes(db *gorm.DB) ([]Note, error) {
-	var notes []Note
-	if err := db.Find(&notes).Error; err != nil {
-		return nil, err
+func DeleteNote(db *gorm.DB, id uuid.UUID) error {
+	var note Note
+	if err := db.First(&note, id).Error; err != nil {
+		return err
 	}
-	return notes, nil
+
+	if err := db.Delete(&note).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
