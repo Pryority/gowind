@@ -1,7 +1,17 @@
+{{ define "about" }}
 <section class="container mt-14">
-    <div class="flex w-full min-h-screen bg-blue-100 rounded-lg p-8">
-        <p class="text-lg tracking-wide">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia modi alias quae, quas ea nulla tempore? Iure voluptatem rem quod vero culpa architecto corporis est, in aspernatur magnam, dolore adipisci, natus nostrum. Veniam, suscipit. Delectus dignissimos doloribus eos. Modi officia excepturi doloribus facilis commodi reiciendis quis quas. Vitae aliquam praesentium fugit ut eos, reprehenderit deserunt provident eaque obcaecati distinctio pariatur quas ab suscipit totam consequuntur modi repudiandae iste recusandae odit delectus aspernatur, ipsum quis? Placeat cumque optio iste et dolore?
-        </p>
+    <div class="flex flex-col gap-4 items-center w-full min-h-screen">
+        <div class="flex w-full justify-start">
+            <h3 class="text-3xl font-semibold uppercase tracking-tighter">{{ .RouteName }}</h3>
+        </div>
+        <div class="w-full md:w-5/6">
+            <p class="text-lg tracking-wide leading-relaxed">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia modi alias quae, quas ea nulla tempore? Iure voluptatem rem quod vero culpa architecto corporis est, in aspernatur magnam, dolore adipisci, natus nostrum. Veniam, suscipit. Delectus dignissimos doloribus eos. Modi officia excepturi doloribus facilis commodi reiciendis quis quas. Vitae aliquam praesentium fugit ut eos, reprehenderit deserunt provident eaque obcaecati distinctio pariatur quas ab suscipit totam consequuntur modi repudiandae iste recusandae odit delectus aspernatur, ipsum quis? Placeat cumque optio iste et dolore?
+            </p>
+        </div>
+        <div class="hidden md:block md:w-1/2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg" alt="About Us Image" class="rounded-lg shadow-lg">
+        </div>
     </div>
 </section>
+{{ end }}
