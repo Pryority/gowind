@@ -4,20 +4,21 @@
     <div class="flex w-full justify-start">
       <h3 class="text-3xl font-semibold uppercase tracking-tighter">{{ .RouteName }}</h3>
     </div>    
-    <div class="grid md:grid-cols-2 w-full items-start">
-      <form hx-post="/api/notes" hx-swap="outerHTML" hx-target="#notes-list" method="POST" class="flex flex-col gap-4 bg-blue-50 p-4 border-4 border-blue-200 rounded-lg">
+    <div class="grid md:grid-cols-2 gap-8 w-full items-start">
+      <form hx-post="/api/notes" hx-target="#notes-list" method="POST" class="flex flex-col gap-4 bg-blue-50 p-4 border-4 border-blue-200 rounded-lg">
         <h4 class="tracking-tighter font-semibold text-xl uppercase">Create a Note</h4>
-        <input class="input" name="title" placeholder="Give your Note a title"/>
-        <input class="input" name="content" placeholder="Add content to your note"/>
-        <input class="input" name="category" placeholder="Add a category to your note"/>
+        <input class="input" name="title" placeholder="Give your Note a title">
+        <input class="input" name="content" placeholder="Add content to your note">
+        <input class="input" name="category" placeholder="Add a category to your note">
         <div class="flex w-full justify-center">
-          <div class="flex w-full justify-center">
-            <button type="submit" class="flex bg-indigo-400 hover:bg-indigo-600 transition-all ease-in-out duration-100 px-6 py-2 rounded-lg border-4 text-white">Submit</button>
-          </div>
+            <div class="flex w-full justify-center">
+                <!-- The form submission will be handled by htmx with hx-trigger="submit" -->
+                <button type="submit" class="flex bg-indigo-400 hover:bg-indigo-600 transition-all ease-in-out duration-100 px-6 py-2 rounded-lg border-4 text-white">Submit</button>
+            </div>
         </div>
       </form>
-      <div class="flex flex-col gap-8 items-start p-8 w-full">
-        <ul id="notes-list" class="flex flex-col gap-8 list-none ml-24 text-indigo-900">
+      <div class="flex flex-col w-full">
+        <ul id="notes-list" class="flex flex-col w-full gap-8 list-none text-indigo-900">
           {{ range .Notes }}
           <li class="text-3xl p-4 rounded-lg bg-stone-50 border">
             <h2 class="font-semibold tracking-tight">{{ .Title }}</h2>
